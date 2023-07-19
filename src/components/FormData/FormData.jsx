@@ -1,7 +1,7 @@
 import React from 'react';
 import css from './FormData.module.css';
 import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
+import { addContact } from 'redux/operations';
 
 export function FormData() {
   const dispatch = useDispatch();
@@ -9,7 +9,7 @@ export function FormData() {
   const handleSubmit = event => {
     event.preventDefault();
     const form = event.target;
-    dispatch(addContact(form.name.value, form.number.value));
+    dispatch(addContact({ name: form.name.value, phone: form.phone.value }));
     form.reset();
   };
 
@@ -34,7 +34,7 @@ export function FormData() {
             <input
               className={css.input__change}
               type="tel"
-              name="number"
+              name="phone"
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               required
